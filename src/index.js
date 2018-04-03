@@ -36,8 +36,8 @@ class Eliza {
         this.initials = initials;
         this.finals = finals;
         this.quits = quits;
-        this.pres = pres;
-        this.posts = posts;
+        this.presRaw = pres;
+        this.postsRaw = posts;
         this.synons = synons;
         this.keywords = keywords;
         this.transforms = transforms;
@@ -126,6 +126,24 @@ class Eliza {
             }
         }
         this.keywords.sort(sortKeywords);
+        this.pres = {};
+        this.posts = {};
+        {
+            const a = [];
+            for (let i = 0; i < this.presRaw.length; i++) {
+                a.push(this.presRaw[i][0]);
+                this.pres[this.presRaw[i][0]] = this.presRaw[i][1];
+            }
+            this.preExp = new RegExp(`\\b(${a.join('|')})\\b`);
+        }
+        {
+            const a = [];
+            for (let i = 0; i < this.postsRaw.length; i++) {
+                a.push(this.postsRaw[i][0]);
+                this.posts[this.postsRaw[i][0]] = this.postsRaw[i][1];
+            }
+            this.postExp = new RegExp(`\\b(${a.join('|')})\\b`);
+        }
         this.dataProcessed = true;
         return this;
     }
