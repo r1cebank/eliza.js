@@ -8,7 +8,7 @@
  * Japascript implementation by Siyuan Gao 2018 <siyuangao@gmail.com>
  */
 
-const defaultData = require('./elizadata.json');
+const defaultData = require('./rules/en.json');
 
 
 function sortKeywords (a, b) {
